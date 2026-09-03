@@ -1,6 +1,7 @@
 import { Composer } from "grammy";
 import type { Ctx } from "../bot.js";
-import { mainMenuKeyboard } from "../toolkit/index.js";
+import { inlineButton, inlineKeyboard, mainMenuKeyboard } from "../toolkit/index.js";
+import { Store } from "../store.js";
 
 // The /start handler renders the bot's MAIN MENU — the primary way users operate
 // a button-first bot. A feature adds its own button by calling
@@ -9,10 +10,22 @@ import { mainMenuKeyboard } from "../toolkit/index.js";
 // file to add a feature. Send ONE message — no placeholder line above the menu.
 const composer = new Composer<Ctx>();
 
-const WELCOME = "👋 Welcome! Tap a button below to get started.";
+const WELCOME = "مرحباً بك في متجر شمس كاش.";
 
 composer.command("start", async (ctx) => {
-  await ctx.reply(WELCOME, { reply_markup: mainMenuKeyboard() });
+  const store = new Store(ctx);
+  if (!(await store.available())) {
+    await ctx.reply(`${WELCOME}\n\nالمتجر غير مُعدّ للحفظ بعد. تواصل مع المالك.`, { reply_markup: mainMenuKeyboard() });
+    return;
+  }
+  const products = await store.products();
+  if (!products.length) {
+    await ctx.reply(`${WELCOME}\n\nلا توجد منتجات بعد — سيضيف المالك منتجات قريباً.`, { reply_markup: mainMenuKeyboard() });
+    return;
+  }
+  const rows = products.map((product) => [inlineButton(`شراء ${product.title}`, `order:summary:${product.id}`)]);
+  rows.push(...(mainMenuKeyboard().inline_keyboard as typeof rows));
+  await ctx.reply("اختر منتجاً لعرض تفاصيله وبدء الشراء.", { reply_markup: inlineKeyboard(rows) });
 });
 
 // "Back to menu" — re-render the main menu in place from any sub-view.

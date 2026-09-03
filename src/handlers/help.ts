@@ -8,11 +8,9 @@ import { inlineButton, inlineKeyboard } from "../toolkit/index.js";
 // main menu (`menu:help`). Enhance the copy for your specific bot; keep it short.
 const composer = new Composer<Ctx>();
 
-const HELP =
-  "ℹ️ Tap /start to open the menu, then pick what you want from the buttons.\n\n" +
-  "Everything in this bot is reachable by tapping — you don't need to remember any commands.";
+const HELP = "ابدأ من /start، ثم اختر ما تحتاجه من الأزرار.\n\nيمكنك تصفح المنتجات ومتابعة طلباتك بسهولة.";
 
-const backToMenu = inlineKeyboard([[inlineButton("⬅️ Back to menu", "menu:main")]]);
+const backToMenu = inlineKeyboard([[inlineButton("العودة للقائمة", "menu:main")]]);
 
 composer.command("help", async (ctx) => {
   await ctx.reply(HELP);

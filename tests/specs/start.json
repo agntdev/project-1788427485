@@ -7,7 +7,7 @@
         "expect": [
           {
             "method": "sendMessage",
-            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+            "payload": { "text": "مرحباً بك في متجر شمس كاش.\n\nالمتجر غير مُعدّ للحفظ بعد. تواصل مع المالك." }
           }
         ]
       }
