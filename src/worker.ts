@@ -14,6 +14,7 @@ import { webhookCallback, Composer, type Bot } from "grammy";
 import { buildBot, type Ctx } from "./bot.js";
 import { handlers } from "./handlers.generated.js";
 import { createDurableSessionStorage, type WorkerEnv } from "./toolkit/session/durable.js";
+import { handleApi } from "./api.js";
 
 export { ChatDO } from "./toolkit/session/durable.js";
 
@@ -64,6 +65,10 @@ export default {
 
     if (url.pathname === "/health") {
       return Response.json({ ok: true, runtime: "cloudflare-workers" });
+    }
+
+    if (url.pathname === "/api/v1" || url.pathname.startsWith("/api/v1/")) {
+      return handleApi(request, env);
     }
 
     if (request.method === "POST" && url.pathname === "/tg") {
