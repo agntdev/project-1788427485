@@ -40,6 +40,7 @@ export interface WorkerEnv {
   WEBHOOK_SECRET?: string;
   CHAT_DO: DONamespace;
   DB?: unknown; // D1 binding (app data); see AGENTS.md
+  ADMIN_CHAT_ID?: string;
   BOT_TELEMETRY_URL?: string;
   BOT_TELEMETRY_SECRET?: string;
   BOT_TELEMETRY_SALT?: string;
