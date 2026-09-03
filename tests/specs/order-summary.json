@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Initiate purchase flow for selected product"
+              "text": "اختر منتجاً من قائمة المنتجات أولاً."
             }
           }
         ],

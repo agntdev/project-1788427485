@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "View order history and delivery status"
+              "text": "المتجر غير مُعدّ للحفظ بعد. تواصل مع المالك."
             }
           }
         ],

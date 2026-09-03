@@ -31,7 +31,7 @@ export type OwnerAwareCtx = {
   env?: Record<string, unknown> | null;
   from?: { id: number } | undefined;
   chat?: { id: number } | undefined;
-  reply: (text: string, ...args: unknown[]) => unknown | Promise<unknown>;
+  reply: (text: string, other?: any, signal?: AbortSignal) => unknown | Promise<unknown>;
   answerCallbackQuery?: (
     opts?: { text?: string; show_alert?: boolean },
   ) => unknown | Promise<unknown>;
@@ -96,7 +96,7 @@ export function isOwner(ctx: {
  * On deny: answers callback (when present) and replies in plain language.
  * Does not throw — callers should `return` when this is false.
  */
-export async function requireOwner(ctx: OwnerAwareCtx): Promise<boolean> {
+export async function requireOwner(ctx: any): Promise<boolean> {
   if (isOwner(ctx)) return true;
 
   const unset = adminChatId(ctx) === undefined;
