@@ -1,0 +1,44 @@
+[
+  {
+    "name": "/add_product requires configured owner access",
+    "steps": [
+      {
+        "send": { "text": "/add_product" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "Owner access isn't set up yet." }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/edit_product requires configured owner access",
+    "steps": [
+      {
+        "send": { "text": "/edit_product" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "Owner access isn't set up yet." }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/delete_product requires configured owner access",
+    "steps": [
+      {
+        "send": { "text": "/delete_product" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "Owner access isn't set up yet." }
+          }
+        ]
+      }
+    ]
+  }
+]
